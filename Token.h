@@ -6,6 +6,9 @@
 #define LISPINTERPRETER_TOKEN_H
 
 #include <string>
+#include <queue>
+#include <istream>
+
 using namespace std;
 
 enum TokenType{
@@ -20,6 +23,7 @@ enum TokenType{
 
 class Token {
 public:
+   // static queue<Token> Tokenize(istream sstream);
     TokenType getType() const;
 
     void setType(TokenType type);
