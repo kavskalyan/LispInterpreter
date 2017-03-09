@@ -10,6 +10,13 @@ SExpression* SExpression::symbolicAtom(string str){
     return ne;
 
 }
+SExpression::~SExpression(){
+    if(getType() == NONATOM){
+        delete getLeft();
+        delete getRight();
+    }
+
+}
 SExpression::SExpression(SExpType aType):type(aType){
 
 }

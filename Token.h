@@ -18,7 +18,8 @@ enum TokenType{
     IDENTIFIER,
     INTEGER,
     SPACE,
-    ENDOFLINE
+    ENDOFLINE, //$
+    ENDOFINPUT //$$
 };
 
 class Token {

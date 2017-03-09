@@ -20,6 +20,7 @@ class SExpression {
 public:
     static SExpression* symbolicAtom(string s);
     SExpression(SExpType);
+    ~SExpression();
 private:
     //SExpression(int);
     //SExpression(string);
@@ -27,7 +28,7 @@ private:
     SExpType type; /* 1: integer atom; 2: symbolic atom; 3: non-atom */
     int val; /* if type is 1 */
     std::string name; /* if type is 2 */
-    SExpression * left; /* if type is 2 */
+    SExpression * left; /* if type is 3 */
     SExpression * right; /* if type is 3 */
 public:
     SExpType getType() const;

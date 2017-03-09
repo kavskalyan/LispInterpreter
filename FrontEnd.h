@@ -19,13 +19,13 @@ private:
     SExpression * inputRoutine1OpenBraceIdentifier();
     SExpression * inputRoutine2();
     Token checkNextToken();
-    void skipNextToken(Token tkn);
+    void skipNextToken();
     void loadNextToken();
 
     Token currentToken;
     Token previousToken;
     void initializeInputStream();
-    fstream inputFileStream;
+    //istream inputFileStream;
 
 };
 
