@@ -7,7 +7,7 @@
 
 
 #include <string>
-#include <vector>
+#include <map>
 using namespace std;
 
 enum SExpType{
@@ -19,12 +19,14 @@ enum SExpType{
 class SExpression {
 public:
     static SExpression* symbolicAtom(string s);
+    static void InitializeDefaultSymbolizAtoms();
+    static void DeleteSymbolicAtoms();
     SExpression(SExpType);
     ~SExpression();
 private:
     //SExpression(int);
     //SExpression(string);
-    static vector<SExpression*> identifiers;
+    static map<string,SExpression*> identifiers;
     SExpType type; /* 1: integer atom; 2: symbolic atom; 3: non-atom */
     int val; /* if type is 1 */
     std::string name; /* if type is 2 */

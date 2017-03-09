@@ -1,9 +1,9 @@
 #include <iostream>
-#include "FrontEnd.h"
+#include "Parser.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    FrontEnd frontEnd;
+   // std::cout << "Hello, World!" << std::endl;
+    Parser Parser;
     return 0;
 }
 

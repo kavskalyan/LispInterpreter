@@ -3,11 +3,34 @@
 //
 
 #include "SExpression.h"
+map<string,SExpression*> SExpression::identifiers;
 
+void SExpression::InitializeDefaultSymbolizAtoms(){
+    SExpression * nilExp = new SExpression(SYMBOLICATOM);
+    nilExp->setName("NIL");
+    identifiers["NIL"] = nilExp;
+    SExpression * trueExp = new SExpression(SYMBOLICATOM);
+    nilExp->setName("T");
+    identifiers["T"] = trueExp;
+}
+void SExpression::DeleteSymbolicAtoms(){
+    for(auto it = identifiers.begin();it != identifiers.end(); it++){
+        SExpression * symAtom = it->second;
+        it->second = NULL;
+        delete(symAtom);
+
+    }
+
+}
 SExpression* SExpression::symbolicAtom(string str){
-    SExpression * ne = new SExpression(SYMBOLICATOM);
-    ne->setName(str);
-    return ne;
+    if(identifiers.find(str) == identifiers.end() || identifiers[str]!= NULL){
+        SExpression * ne = new SExpression(SYMBOLICATOM);
+        ne->setName(str);
+        identifiers[str] = ne;
+        return ne;
+    }
+    else
+        return identifiers[str];
 
 }
 SExpression::~SExpression(){

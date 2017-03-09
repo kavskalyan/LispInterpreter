@@ -22,16 +22,16 @@ bool Lexer::isIntegerTokenValid(string str){
     return true;
 }
 
-void Lexer::skipNextToken(){
-    loadNextToken();
+void Lexer::skipNextToken(bool isInCatchMode){
+    loadNextToken(isInCatchMode);
     if(currentToken.getType() == INTEGER){
         if(!isIntegerTokenValid(currentToken.getToken())){
-            throw std::runtime_error("**error: Invalid integer token in input:"+currentToken.getToken());
+            if(!isInCatchMode)
+                throw std::runtime_error("**error: Invalid integer token in input:"+currentToken.getToken());
         }
     }
 }
-void Lexer::loadNextToken() {
-    //istream inputFileStream = cin;
+void Lexer::loadNextToken(bool isInCatchMode) {
     Token newToken;
     bool breakToken = false;
     while(char c = cin.get()){
@@ -126,11 +126,12 @@ void Lexer::loadNextToken() {
             }
         }
         else{
-            if(newToken.getType()== ENDOFLINE)
+            if(newToken.getToken()!= "" && newToken.getType()== ENDOFLINE)
                 break;
             if(c != '\n' && c != '\t' && c != ' ' && c!= '$'){
                 string a (1,c);
-                throw runtime_error("**error: Invalid character in input:'"+a+"'");
+                if(!isInCatchMode)
+                    throw runtime_error("**error: Invalid character in input:'"+a+"'");
             }
         }
         if(breakToken){
@@ -139,5 +140,4 @@ void Lexer::loadNextToken() {
         }
     }
     currentToken = newToken;
-    //cout<<"Token:"<<currentToken.getToken()<<endl;
 }

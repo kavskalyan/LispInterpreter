@@ -1,0 +1,18 @@
+Design of the Interpreter:
+1. the program is divided into parts: Lexer (.h,.cpp) and Parser (.h, .cpp).
+2. Lexer implements the functions checkNextToken() and skipNextToken() just as mentioned in the comments given by the Professor.
+(checkNextToken() returns the same next token unless the skipNextToken() is called, which updates to the next token)
+3. The responsibility of lexer is just to scan the input buffer and return the tokens whenever requested by parser.
+4. The parser implements the grammar rules. The following are the grammar rules defined by me:
+<ls>  :== <IR1>
+<IR1> :== INT 
+	 | ID 
+	 | ( <IR1> . <IR1> ) 
+	 | ( <IR1><IR2> 
+	 | ()
+
+<IR2> :== ) 
+	 | [SPACE]<IR1><IR2>
+
+The function corresponding to the rules of <IR1> is implemented in the function inputRoutine1() and the functions corresponding to the <IR2> is implemented in inputRoutine2.
+

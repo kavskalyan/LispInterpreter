@@ -10,8 +10,8 @@
 class Lexer {
 public:
     Token checkNextToken();
-    void skipNextToken();
-    void loadNextToken();
+    void skipNextToken(bool isInCatchMode = false);
+    void loadNextToken(bool isInCatchMode = false);
 private:
     bool isIntegerTokenValid(string str);
     Token currentToken;

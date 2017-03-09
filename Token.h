@@ -8,6 +8,7 @@
 #include <string>
 #include <queue>
 #include <istream>
+#include <stdexcept>
 
 using namespace std;
 

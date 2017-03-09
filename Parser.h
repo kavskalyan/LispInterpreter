@@ -12,6 +12,7 @@
 class Parser {
 public:
     Parser();
+    ~Parser();
     Lexer lexer;
     SExpression * inputRoutine1();
     SExpression * inputRoutine2();
