@@ -29,3 +29,9 @@
 *.app
 
 *.xml
+
+*.iml
+
+*.bin
+
+cmake-build-debug/
