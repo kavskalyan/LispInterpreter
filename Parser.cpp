@@ -4,12 +4,18 @@
 
 #include "Parser.h"
 #include "Token.h"
+#include "Evaluator.h"
 using namespace std;
 
 #include <iostream>
 Parser::Parser() {
+    cout<<"Started>>>>>>>>>"<<endl;
     lexer.loadNextToken();
     SExpression::InitializeDefaultSymbolizAtoms();
+    Evaluator evaluator;
+    SExpression * Alist = SExpression::symbolicAtom("NIL");
+    SExpression * pDList = SExpression::symbolicAtom("NIL");
+    SExpression ** Dlist = &pDList;
     while (lexer.checkNextToken().getType() != ENDOFINPUT){
         try{
            // cout<<"Here";
@@ -20,14 +26,17 @@ Parser::Parser() {
             }
             if(lexer.checkNextToken().getType() == ENDOFLINE|| lexer.checkNextToken().getType() == ENDOFINPUT) {
                 string outString = stringifySExpression(outputExp);
-                cout << "Output:" << outString << endl;
+                cout << "Output before eval>" << outString << endl;
+                outputExp = evaluator.eval(outputExp,Alist,Dlist);
+                outString = stringifySExpression(outputExp);
+                cout << "Output after eval>" << outString << endl;
                 if(lexer.checkNextToken().getType() == ENDOFINPUT)
                     break;
                 //cout <<"Input:";
                 lexer.skipNextToken();
             }
             else
-                throw std::runtime_error("**error: Invalid token after valid s-expression:"+lexer.checkNextToken().getToken());
+                throw std::runtime_error(">Error:: Invalid token after valid s-expression:"+lexer.checkNextToken().getToken());
 
 
         }
@@ -87,7 +96,7 @@ SExpression* Parser::inputRoutine1() {
             nexttoken = lexer.checkNextToken();
             //<IR1> :==  ( <IR1> . <IR1> )
             if(nexttoken.getType() != CLOSEBRACE){
-                throw std::runtime_error("**error:Expected ')' ,found "+nexttoken.getToken() );
+                throw std::runtime_error(">Error::Expected ')' ,found "+nexttoken.getToken() );
                 return NULL;
             }
             else
@@ -117,7 +126,7 @@ SExpression* Parser::inputRoutine1() {
         return  newIntegerExpression;
     }
     else{
-        throw std::runtime_error("**error: Invalid token in s-expression:"+token.getToken());
+        throw std::runtime_error(">Error:: Invalid token in s-expression:"+token.getToken());
         //ERROR
     }
 }
@@ -138,7 +147,7 @@ SExpression* Parser::inputRoutine2() {
         return newExpression;
     }
     else{
-        throw std::runtime_error("**error: Invalid token in s-expression:"+token.getToken());
+        throw std::runtime_error(">Error:: Invalid token in s-expression:"+token.getToken());
         return NULL;
     }
 }

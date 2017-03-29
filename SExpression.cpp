@@ -10,7 +10,7 @@ void SExpression::InitializeDefaultSymbolizAtoms(){
     nilExp->setName("NIL");
     identifiers["NIL"] = nilExp;
     SExpression * trueExp = new SExpression(SYMBOLICATOM);
-    nilExp->setName("T");
+    trueExp->setName("T");
     identifiers["T"] = trueExp;
 }
 void SExpression::DeleteSymbolicAtoms(){
@@ -23,7 +23,7 @@ void SExpression::DeleteSymbolicAtoms(){
 
 }
 SExpression* SExpression::symbolicAtom(string str){
-    if(identifiers.find(str) == identifiers.end() || identifiers[str]!= NULL){
+    if(identifiers.find(str) == identifiers.end() || identifiers[str] == NULL){
         SExpression * ne = new SExpression(SYMBOLICATOM);
         ne->setName(str);
         identifiers[str] = ne;

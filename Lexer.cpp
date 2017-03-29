@@ -27,7 +27,7 @@ void Lexer::skipNextToken(bool isInCatchMode){
     if(currentToken.getType() == INTEGER){
         if(!isIntegerTokenValid(currentToken.getToken())){
             if(!isInCatchMode)
-                throw std::runtime_error("**error: Invalid integer token in input:"+currentToken.getToken());
+                throw std::runtime_error(">Error:: Invalid integer token in input:"+currentToken.getToken());
         }
     }
 }
@@ -131,7 +131,7 @@ void Lexer::loadNextToken(bool isInCatchMode) {
             if(c != '\n' && c != '\t' && c != ' ' && c!= '$'){
                 string a (1,c);
                 if(!isInCatchMode)
-                    throw runtime_error("**error: Invalid character in input:'"+a+"'");
+                    throw runtime_error(">Error:: Invalid character in input:'"+a+"'");
             }
         }
         if(breakToken){
