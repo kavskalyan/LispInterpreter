@@ -31,8 +31,11 @@ class Evaluator {
     SExpression* addPairsToAList(SExpression * parameters, SExpression * arguments, SExpression * initialAList);
     SExpression * addFunctionToDlist(SExpression * function, SExpression * initialDlist);
     SExpression * getValFromDlist(SExpression* functionName, SExpression * dlist);
+    void assertNumberOfArguments(SExpression* funcName,SExpression* arguments, int numExpectedArguments);
+    int lengthOfList(SExpression * list);
     bool isInAlist(SExpression * symbolicAtom,SExpression * aList);
     bool isTrue(SExpression * exp);
+    bool isList(SExpression * exp);
 public:
     SExpression * eval(SExpression * exp, SExpression * Alist, SExpression ** Dlist);
 };

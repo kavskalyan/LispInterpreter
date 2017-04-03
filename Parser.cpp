@@ -9,7 +9,7 @@ using namespace std;
 
 #include <iostream>
 Parser::Parser() {
-    cout<<"Started>>>>>>>>>"<<endl;
+    cout<<"<Program Started>"<<endl;
     lexer.loadNextToken();
     SExpression::InitializeDefaultSymbolizAtoms();
     Evaluator evaluator;
@@ -26,10 +26,10 @@ Parser::Parser() {
             }
             if(lexer.checkNextToken().getType() == ENDOFLINE|| lexer.checkNextToken().getType() == ENDOFINPUT) {
                 string outString = stringifySExpression(outputExp);
-                cout << "Output before eval>" << outString << endl;
+                cout << "Dot notation>" << outString << endl;
                 outputExp = evaluator.eval(outputExp,Alist,Dlist);
                 outString = stringifySExpression(outputExp);
-                cout << "Output after eval>" << outString << endl;
+                cout << ">" << outString << endl;
                 if(lexer.checkNextToken().getType() == ENDOFINPUT)
                     break;
                 //cout <<"Input:";
@@ -60,7 +60,7 @@ Parser::Parser() {
             //cout<<"end of catch"<<endl;
         }
     }
-    cout<<"End of program"<<endl;
+    cout<<"<End of program>"<<endl;
 }
 Parser::~Parser() {
     SExpression::DeleteSymbolicAtoms();
